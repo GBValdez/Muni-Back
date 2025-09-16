@@ -9,7 +9,5 @@ namespace project.utils.Catalogues
     {
         public long? id { get; set; }
         public string? name { get; set; }
-        public long? catalogueParentId { get; set; }
-
     }
 }

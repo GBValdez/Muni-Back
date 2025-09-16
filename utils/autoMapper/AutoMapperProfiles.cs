@@ -18,16 +18,12 @@ namespace project.utils.autoMapper
             CreateMap<userEntity, userDto>()
             .ForMember(userDtoId => userDtoId.isActive, options => options.MapFrom(src => src.deleteAt == null));
             ;
+            CreateMap<userCreationDto, userEntity>();
 
             CreateMap<rolEntity, rolDto>();
             CreateMap<rolCreationDto, rolEntity>();
-            CreateMap<Client, clientDto>();
-            CreateMap<clientCreationDto, Client>();
-            CreateMap<clientCreationDto, userCreationDto>();
             CreateMap<Catalogue, catalogueDto>();
             CreateMap<catalogueCreationDto, Catalogue>();
-            CreateMap<catalogueTypeDtoCreation, catalogueType>();
-            CreateMap<catalogueType, catalogueTypeDtoCreation>();
 
         }
 

@@ -4,9 +4,9 @@ namespace project.users.dto
 {
     public class credentialsDto
     {
-        [Required]
+        [Required(ErrorMessage = "El email es requerido")]
         [EmailAddress]
-        public string email { get; set; } = null!;
+        public string Email { get; set; } = null!;
         [Required]
         public string password { get; set; } = null!;
     }

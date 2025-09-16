@@ -12,6 +12,10 @@ namespace project.utils
 
         [ForeignKey("userUpdateId")]
         public userEntity? userUpdate { get; set; }
+        public string? userCreateId { get; set; }
+
+        [ForeignKey("userCreateId")]
+        public userEntity? userCreate { get; set; }
         public DateTime? deleteAt { get; set; }
         public DateTime? createAt { get; set; }
         public DateTime? updateAt { get; set; }

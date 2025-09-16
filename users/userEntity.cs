@@ -10,6 +10,9 @@ namespace project.users
         public userEntity? userUpdate { get; set; }
         public DateTime? createAt { get; set; }
         public DateTime? updateAt { get; set; }
-
+        public string address { get; set; }
+        public string dpi { get; set; }
+        public string name { get; set; }
+        public DateOnly birthdate { get; set; }
     }
 }

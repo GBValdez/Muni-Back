@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
-using fletesProyect.models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
@@ -111,18 +110,17 @@ namespace project.users
 
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> register(clientCreationDto newCliente)
+        public async Task<IActionResult> register(userCreationDto newCliente)
         {
 
-            userCreationDto credentials = mapper.Map<userCreationDto>(newCliente);
-            errorMessageDto error = await userSvc.register(credentials, new List<string> { "userNormal" });
+            errorMessageDto error = await userSvc.register(newCliente, new List<string> { "ADMINISTRATOR" });
             if (error != null)
                 return BadRequest(error);
-            userEntity newUser = await userManager.FindByEmailAsync(newCliente.email);
-            Client cliente = mapper.Map<Client>(newCliente);
-            cliente.userId = newUser.Id;
-            context.Clients.Add(cliente);
-            await context.SaveChangesAsync();
+            // userEntity newUser = await userManager.FindByEmailAsync(newCliente.email);
+            // Client cliente = mapper.Map<Client>(newCliente);
+            // cliente.userId = newUser.Id;
+            // context.Clients.Add(cliente);
+            // await context.SaveChangesAsync();
             return NoContent();
         }
 
@@ -216,7 +214,7 @@ namespace project.users
         public async Task<ActionResult<authenticationDto>> login(credentialsDto credentials)
         {
 
-            userEntity EMAIL = await userManager.FindByEmailAsync(credentials.email);
+            userEntity EMAIL = await userManager.FindByEmailAsync(credentials.Email);
             if (EMAIL == null)
                 return BadRequest(new errorMessageDto("Credenciales invalidas"));
 
@@ -246,7 +244,7 @@ namespace project.users
         // }
         private async Task<authenticationDto> createToken(credentialsDto credentials)
         {
-            userEntity user = await userManager.FindByEmailAsync(credentials.email);
+            userEntity user = await userManager.FindByEmailAsync(credentials.Email);
             IList<Claim> claimUser = await userManager.GetClaimsAsync(user);
             IList<string> roles = await userManager.GetRolesAsync(user);
             foreach (string rol in roles)
@@ -255,20 +253,10 @@ namespace project.users
             }
             claimUser.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
             claimUser.Add(new Claim(ClaimTypes.Name, user.UserName)); // Agrega el nombre de usuario como un claim
-            Client cliente = await context.Clients.Where(c => c.userId == user.Id && c.deleteAt == null).FirstOrDefaultAsync();
-            if (cliente != null)
-            {
-                claimUser.Add(new Claim("clientId", cliente.Id.ToString()));
-            }
-            Driver driverThis = await context.Drivers.Where(e => e.userId == user.Id && e.deleteAt == null).FirstOrDefaultAsync();
-            if (driverThis != null)
-            {
-                claimUser.Add(new Claim("driverId", driverThis.Id.ToString()));
-            }
 
             // Estos son los parametros que guardara el webToken
             List<Claim> claims = new List<Claim>(){
-                new Claim("email", credentials.email),
+                new Claim("email", credentials.Email),
             };
             claims.AddRange(claimUser);
 

@@ -11,7 +11,8 @@ using project.utils.dto;
 
 namespace project.utils.catalogues
 {
-    public class cataloguesController : controllerCommons<Catalogue, catalogueCreationDto, catalogueDto, catalogueQueryDto, object, long>
+    public class cataloguesController<TEntity> : controllerCommons<TEntity, catalogueCreationDto, catalogueDto, catalogueQueryDto, object, long>
+    where TEntity : Catalogue
     {
         protected string codCatalogue { get; set; }
         public cataloguesController(DBProyContext context, IMapper mapper) : base(context, mapper)
@@ -39,17 +40,15 @@ namespace project.utils.catalogues
         }
 
 
-        protected override async Task<errorMessageDto> validPost(Catalogue entity, catalogueCreationDto dtoNew, object queryParams)
+        protected override async Task<errorMessageDto> validPost(TEntity entity, catalogueCreationDto dtoNew, object queryParams)
         {
             errorMessageDto error = await validCataloguePost(entity, dtoNew, queryParams);
             if (error != null)
                 return error;
-
-            entity.catalogueTypeId = (await getCatalogueType()).Id;
             return null;
         }
 
-        protected override async Task<errorMessageDto> validPut(catalogueCreationDto dtoNew, Catalogue entity, object queryParams)
+        protected override async Task<errorMessageDto> validPut(catalogueCreationDto dtoNew, TEntity entity, object queryParams)
         {
             errorMessageDto error = await validCataloguePut(entity, dtoNew, queryParams);
             if (error != null)
@@ -58,23 +57,14 @@ namespace project.utils.catalogues
             return null;
         }
 
-
-        protected Task<catalogueType> getCatalogueType()
+        protected override async Task<IQueryable<TEntity>> modifyGet(IQueryable<TEntity> query, catalogueQueryDto queryParams)
         {
-            return context.catalogueTypes.Where(db => db.code == codCatalogue).FirstOrDefaultAsync();
-        }
-
-        protected override async Task<IQueryable<Catalogue>> modifyGet(IQueryable<Catalogue> query, catalogueQueryDto queryParams)
-        {
-            catalogueType catalogueType = await getCatalogueType();
             if (queryParams.name != null)
                 query = query.Where(db => db.name.Contains(queryParams.name));
-            if (queryParams.catalogueParentId != null)
-                query = query.Where(db => db.catalogueParentId == queryParams.catalogueParentId);
             if (queryParams.id != null)
                 query = query.Where(db => db.Id == queryParams.id);
 
-            return query.Where(db => db.catalogueTypeId == catalogueType.Id).Include(db => db.catalogueParent);
+            return query;
         }
 
         // Funciones modificables 

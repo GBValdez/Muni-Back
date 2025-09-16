@@ -8,10 +8,4 @@ public partial class Catalogue : CommonsModel<long>
 {
     public string name { get; set; } = null!;
     public string? description { get; set; }
-    public long catalogueTypeId { get; set; }
-    public long? catalogueParentId { get; set; }
-    public Catalogue? catalogueParent { get; set; }
-    public catalogueType catalogueType { get; set; } = null!;
-
-
 }

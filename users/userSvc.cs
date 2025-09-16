@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
@@ -18,21 +19,22 @@ namespace project.users
         private readonly UserManager<userEntity> userManager;
         private readonly emailService emailService;
         private readonly IConfiguration configuration;
+        private readonly IMapper mapper;
 
-        public userSvc(UserManager<userEntity> userManager, emailService emailService, IConfiguration configuration)
+        public userSvc(UserManager<userEntity> userManager, emailService emailService, IConfiguration configuration, IMapper mapper)
         {
             this.userManager = userManager;
             this.emailService = emailService;
             this.configuration = configuration;
+            this.mapper = mapper;
         }
         public async Task<errorMessageDto> register(userCreationDto credentials, IList<string> roles)
         {
-            if (await userManager.FindByEmailAsync(credentials.email) != null)
+            if (await userManager.FindByEmailAsync(credentials.Email) != null)
                 return new errorMessageDto("El correo ya esta en uso");
-            if (await userManager.FindByNameAsync(credentials.userName) != null)
+            if (await userManager.FindByNameAsync(credentials.UserName) != null)
                 return new errorMessageDto("El nombre de usuario ya esta en uso");
-            userEntity user = new userEntity() { UserName = credentials.userName, Email = credentials.email };
-
+            userEntity user = this.mapper.Map<userEntity>(credentials);
             IdentityResult result = await userManager.CreateAsync(user, credentials.password);
             if (!result.Succeeded)
                 return result.Errors.Select(e => new errorMessageDto(e.Description)).FirstOrDefault();
@@ -44,9 +46,9 @@ namespace project.users
             string encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
             emailService.SendEmail(new emailSendDto
             {
-                email = credentials.email,
+                email = credentials.Email,
                 subject = "Confirmacion de correo",
-                message = $"<h1>Correo de confirmación Aeropuerto</h1> <a href='{configuration["FrontUrl"]}/user/confirmEmail?email={credentials.email}&token={encodedToken}'>Confirmar correo</a>"
+                message = $"<h1>Correo de confirmación Aeropuerto</h1> <a href='{configuration["FrontUrl"]}/user/confirmEmail?email={credentials.Email}&token={encodedToken}'>Confirmar correo</a>"
             });
             return null;
         }
