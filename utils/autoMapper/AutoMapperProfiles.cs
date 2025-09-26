@@ -1,4 +1,7 @@
 using AutoMapper;
+using back.catalogues;
+using back.reports;
+using back.reports.dto;
 
 using project.roles;
 using project.roles.dto;
@@ -24,6 +27,13 @@ namespace project.utils.autoMapper
             CreateMap<rolCreationDto, rolEntity>();
             CreateMap<Catalogue, catalogueDto>();
             CreateMap<catalogueCreationDto, Catalogue>();
+            CreateMap<catalogueCreationDto, back.catalogues.Type>();
+            CreateMap<catalogueCreationDto, Status>();
+
+            CreateMap<reportDtoCreation, Reports>();
+            CreateMap<Reports, reportDto>();
+
+
 
         }
 

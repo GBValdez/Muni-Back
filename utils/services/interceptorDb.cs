@@ -29,7 +29,11 @@ namespace project.utils.services
             string id = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             foreach (var entry in eventData.Context.ChangeTracker.Entries<ICommonModelHeader>())
             {
-                if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.userCreateId = id;
+                }
+                if (entry.State == EntityState.Modified)
                 {
                     entry.Entity.userUpdateId = id;
                 }

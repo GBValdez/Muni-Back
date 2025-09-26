@@ -15,5 +15,11 @@ namespace back.reports
         public ReportsController(DBProyContext context, IMapper mapper) : base(context, mapper)
         {
         }
+
+        protected async virtual Task finallyPost(Reports entity, reportDtoCreation dtoCreation, object queryParams)
+        {
+
+        }
+
     }
 }

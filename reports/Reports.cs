@@ -14,7 +14,7 @@ namespace back.reports
         public long typeId { get; set; }
         public catalogues.Type type { get; set; }
         public string title = null!;
-        public bool accepted;
+        public string? reasonForRejection;
         public string? userValidationId { get; set; }
 
         [ForeignKey("userValidationId")]

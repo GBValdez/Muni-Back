@@ -10,6 +10,5 @@ namespace back.reports.dto
         public string location { get; set; } = null!;
         public string description { get; set; } = null!;
         public string title = null!;
-        public bool accepted;
     }
 }
