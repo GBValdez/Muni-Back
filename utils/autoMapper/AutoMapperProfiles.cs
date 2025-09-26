@@ -26,9 +26,12 @@ namespace project.utils.autoMapper
             CreateMap<rolEntity, rolDto>();
             CreateMap<rolCreationDto, rolEntity>();
             CreateMap<Catalogue, catalogueDto>();
+
             CreateMap<catalogueCreationDto, Catalogue>();
             CreateMap<catalogueCreationDto, back.catalogues.Type>();
             CreateMap<catalogueCreationDto, Status>();
+            CreateMap<Status, catalogueDto>();
+            CreateMap<back.catalogues.Type, catalogueDto>();
 
             CreateMap<reportDtoCreation, Reports>();
             CreateMap<Reports, reportDto>();

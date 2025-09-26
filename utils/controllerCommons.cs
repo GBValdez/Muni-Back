@@ -94,6 +94,7 @@ namespace project.utils
             errorMessageDto error = await this.validPost(newRegisterEntity, newRegister, queryParams);
             if (error != null)
                 return BadRequest(error);
+
             context.Add(newRegisterEntity);
             await context.SaveChangesAsync();
             await this.finallyPost(newRegisterEntity, newRegister, queryParams);

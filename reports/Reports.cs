@@ -13,11 +13,15 @@ namespace back.reports
         public Status status { get; set; }
         public long typeId { get; set; }
         public catalogues.Type type { get; set; }
-        public string title = null!;
+        public string title { get; set; } = null!;
         public string? reasonForRejection;
         public string? userValidationId { get; set; }
 
         [ForeignKey("userValidationId")]
         public userEntity? userValidation { get; set; }
+        [NotMapped]
+        public int votes { get; set; }
+        [NotMapped]
+        public bool voteMe { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using project.Models;
@@ -11,9 +12,11 @@ using project.Models;
 namespace fletesProyect.Migrations
 {
     [DbContext(typeof(DBProyContext))]
-    partial class DBProyContextModelSnapshot : ModelSnapshot
+    [Migration("20250926055933_Title")]
+    partial class Title
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,10 +233,6 @@ namespace fletesProyect.Migrations
 
                     b.Property<long>("statusId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("title")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<long>("typeId")
                         .HasColumnType("bigint");
