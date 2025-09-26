@@ -18,17 +18,19 @@ namespace back.reports
 {
     [ApiController]
     [Route("reports")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ADMINISTRATOR,userNormal")]
     public class ReportsController : controllerCommons<Reports, reportDtoCreation, reportDto, object, object, long>
     {
         public ReportsController(DBProyContext context, IMapper mapper) : base(context, mapper)
         {
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public override Task<ActionResult<reportDto>> post(reportDtoCreation newRegister, [FromQuery] object queryParams)
         {
             return base.post(newRegister, queryParams);
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public override Task<ActionResult> put(reportDtoCreation entityCurrent, [FromRoute] long id, [FromQuery] object queryCreation)
         {
             return null;
@@ -93,12 +95,59 @@ namespace back.reports
                         votes = r.VotesCount.Count(),
                         voteMe = r.VotesCount.Where(v => v.userCreateId == idUser).Any()
                     })
+                    .OrderByDescending(t => t.votes)
                     .ToListAsync();
 
-            // List<Reports> listDb = await
-            //     query
-            //     .ToListAsync();
             List<reportDto> listDto = mapper.Map<List<reportDto>>(reportsWithVotes);
+            return new resPag<reportDto>
+            {
+                items = listDto,
+                total = total,
+                index = infoQuery.pageNumber,
+                totalPages = totalPages
+            };
+        }
+
+        [HttpGet("getReportsValid")]
+        public async Task<ActionResult<resPag<reportDto>>> getReportsValid([FromQuery] pagQueryDto infoQuery, [FromQuery] object queryParams)
+        {
+            IQueryable<Reports> query = context.Set<Reports>();
+            if (!showDeleted)
+                query = query.Where(db => db.deleteAt == null);
+
+            int total = await query.CountAsync();
+
+            if (total == 0)
+            {
+
+                return new resPag<reportDto>
+                {
+                    items = new List<reportDto>(),
+                    total = 0,
+                    index = 0,
+                    totalPages = 0
+                };
+            }
+
+            int totalPages = (int)Math.Ceiling((double)total / infoQuery.pageSize);
+
+            if (infoQuery.pageNumber > totalPages && !infoQuery.all.Value)
+                return BadRequest(new errorMessageDto("El indice de la pagina es mayor que el numero de paginas total"));
+
+            if (infoQuery.pageNumber < 0 && !infoQuery.all.Value)
+                return BadRequest(new errorMessageDto("El indice de la pagina no puede ser menor que 0"));
+
+            query = query.Include(t => t.userCreate).Include(t => t.status).Include(t => t.type).Where(t => t.statusId == 1).Include(t => t.userCreate);
+
+            if (infoQuery.all == false)
+                query = query
+                .Skip((infoQuery.pageNumber - 1) * infoQuery.pageSize)
+                .Take(infoQuery.pageSize);
+
+            List<Reports> reports = await query
+                    .ToListAsync();
+
+            List<reportDto> listDto = mapper.Map<List<reportDto>>(reports);
             return new resPag<reportDto>
             {
                 items = listDto,
@@ -127,6 +176,62 @@ namespace back.reports
             return Ok();
         }
 
+        [HttpPost("approve/{id}")]
+        public async Task<ActionResult> approve([FromRoute] int id)
+        {
+            string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Reports findReport = await context.Set<Reports>().FirstOrDefaultAsync(v => v.Id == id && v.deleteAt == null);
+            if (findReport != null)
+            {
+                findReport.statusId = 3;
+                findReport.userValidationId = idUser;
+                await context.SaveChangesAsync();
+
+            }
+            else
+            {
+                return BadRequest(new errorMessageDto("No se encontró el reporte"));
+            }
+            return Ok();
+        }
+
+        [HttpPost("decline/{id}")]
+        public async Task<ActionResult> decline([FromRoute] int id, [FromBody] declineReportDto body)
+        {
+            string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Reports findReport = await context.Set<Reports>().FirstOrDefaultAsync(v => v.Id == id && v.deleteAt == null);
+            if (findReport != null)
+            {
+                findReport.statusId = 2;
+                findReport.userValidationId = idUser;
+                findReport.reasonForRejection = body.reasonForRejection;
+                await context.SaveChangesAsync();
+
+            }
+            else
+            {
+                return BadRequest(new errorMessageDto("No se encontró el reporte"));
+            }
+            return Ok();
+        }
+
+        [HttpPost("delete/{id}")]
+        public async Task<ActionResult> delete([FromRoute] int id)
+        {
+            string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Reports findReport = await context.Set<Reports>().FirstOrDefaultAsync(v => v.Id == id && v.deleteAt == null && v.userCreateId == idUser);
+            if (findReport != null)
+            {
+                findReport.deleteAt = DateTime.UtcNow;
+                await context.SaveChangesAsync();
+
+            }
+            else
+            {
+                return BadRequest(new errorMessageDto("No se encontró el reporte"));
+            }
+            return Ok();
+        }
         protected override async Task<errorMessageDto> validPost(Reports entity, reportDtoCreation newRegister, object queryParams)
         {
             entity.statusId = 1;
