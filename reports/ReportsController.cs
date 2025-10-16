@@ -31,12 +31,13 @@ namespace back.reports
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public override Task<ActionResult> put(reportDtoCreation entityCurrent, [FromRoute] long id, [FromQuery] object queryCreation)
         {
             return null;
         }
 
-
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public override async Task<ActionResult<resPag<reportDto>>> get([FromQuery] pagQueryDto infoQuery, [FromQuery] object queryParams)
         {
             IQueryable<Reports> query = context.Set<Reports>();
@@ -108,8 +109,9 @@ namespace back.reports
             };
         }
 
-        [HttpGet("getReportsValid")]
-        public async Task<ActionResult<resPag<reportDto>>> getReportsValid([FromQuery] pagQueryDto infoQuery, [FromQuery] object queryParams)
+        [HttpGet("unvalidation")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ADMINMUNI")]
+        public async Task<ActionResult<resPag<reportDto>>> reportsValid([FromQuery] pagQueryDto infoQuery, [FromQuery] object queryParams)
         {
             IQueryable<Reports> query = context.Set<Reports>();
             if (!showDeleted)
@@ -157,81 +159,49 @@ namespace back.reports
             };
         }
 
-        [HttpPost("vote/{id}")]
-        public async Task<ActionResult> vote([FromRoute] int id)
-        {
-            string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Votes findVote = await context.Set<Votes>().FirstOrDefaultAsync(v => v.reportId == id && v.userCreateId == idUser);
-            if (findVote == null)
-            {
-                Votes voto = new Votes();
-                voto.reportId = id;
-                await context.AddAsync(voto);
-            }
-            else
-            {
-                findVote.deleteAt = findVote.deleteAt != null ? null : DateTime.UtcNow;
-            }
-            await context.SaveChangesAsync();
-            return Ok();
-        }
 
-        [HttpPost("approve/{id}")]
-        public async Task<ActionResult> approve([FromRoute] int id)
+        [HttpPost("request/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ADMINMUNI,ADMINISTRATOR")]
+        public async Task<ActionResult> request([FromRoute] int id, [FromBody] declineReportDto body)
         {
             string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Reports findReport = await context.Set<Reports>().FirstOrDefaultAsync(v => v.Id == id && v.deleteAt == null);
             if (findReport != null)
             {
-                findReport.statusId = 3;
+                if (body.accepted)
+                {
+                    findReport.statusId = 3;
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(body.reasonForRejection))
+                        return BadRequest(new errorMessageDto("La razón es requerida"));
+                    findReport.reasonForRejection = body.reasonForRejection;
+                    findReport.statusId = 2;
+                }
                 findReport.userValidationId = idUser;
                 await context.SaveChangesAsync();
-
             }
             else
             {
-                return BadRequest(new errorMessageDto("No se encontró el reporte"));
+                return NotFound();
             }
             return Ok();
         }
 
-        [HttpPost("decline/{id}")]
-        public async Task<ActionResult> decline([FromRoute] int id, [FromBody] declineReportDto body)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public override Task<ActionResult> delete(long id)
+        {
+            return base.delete(id);
+        }
+
+        protected async override Task<IQueryable<Reports>> modifyDelete(IQueryable<Reports> query)
         {
             string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Reports findReport = await context.Set<Reports>().FirstOrDefaultAsync(v => v.Id == id && v.deleteAt == null);
-            if (findReport != null)
-            {
-                findReport.statusId = 2;
-                findReport.userValidationId = idUser;
-                findReport.reasonForRejection = body.reasonForRejection;
-                await context.SaveChangesAsync();
-
-            }
-            else
-            {
-                return BadRequest(new errorMessageDto("No se encontró el reporte"));
-            }
-            return Ok();
+            query = query.Where(db => db.userCreateId == idUser);
+            return query;
         }
 
-        [HttpPost("delete/{id}")]
-        public async Task<ActionResult> delete([FromRoute] int id)
-        {
-            string idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Reports findReport = await context.Set<Reports>().FirstOrDefaultAsync(v => v.Id == id && v.deleteAt == null && v.userCreateId == idUser);
-            if (findReport != null)
-            {
-                findReport.deleteAt = DateTime.UtcNow;
-                await context.SaveChangesAsync();
-
-            }
-            else
-            {
-                return BadRequest(new errorMessageDto("No se encontró el reporte"));
-            }
-            return Ok();
-        }
         protected override async Task<errorMessageDto> validPost(Reports entity, reportDtoCreation newRegister, object queryParams)
         {
             entity.statusId = 1;

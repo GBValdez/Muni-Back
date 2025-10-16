@@ -114,11 +114,13 @@ namespace project.utils
 
         public virtual async Task<ActionResult> delete(idClass id)
         {
-            TEntity exits = await context.Set<TEntity>()
-                .FirstOrDefaultAsync(Db => ((ICommonModel<idClass>)Db).Id.Equals(id) && ((ICommonModel<idClass>)Db).deleteAt == null);
+            IQueryable<TEntity> query = context.Set<TEntity>();
+            query = await modifyDelete(query);
+            query = query.Where(Db => ((ICommonModel<idClass>)Db).Id.Equals(id) && ((ICommonModel<idClass>)Db).deleteAt == null);
+            TEntity exits = await query.FirstOrDefaultAsync();
             if (exits == null)
             {
-                return NotFound();
+                return BadRequest(new errorMessageDto("No se encontro el registro"));
             }
             errorMessageDto error = await this.validDelete(exits);
             if (error != null)
@@ -128,6 +130,10 @@ namespace project.utils
             return Ok();
         }
 
+        protected virtual async Task<IQueryable<TEntity>> modifyDelete(IQueryable<TEntity> query)
+        {
+            return query;
+        }
         protected virtual async Task<errorMessageDto> validDelete(TEntity entity)
         {
             return null;

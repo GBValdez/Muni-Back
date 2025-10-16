@@ -8,7 +8,7 @@ namespace back.reports.dto
 {
     public class declineReportDto
     {
-        [Required(ErrorMessage = "La razón es requerida")]
+        public bool accepted { get; set; }
         public string reasonForRejection { get; set; }
     }
 }
