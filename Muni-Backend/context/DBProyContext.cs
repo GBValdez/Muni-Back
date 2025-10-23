@@ -26,6 +26,16 @@ public partial class DBProyContext : IdentityDbContext<userEntity, rolEntity, st
     public DbSet<back.catalogues.Type> Types { get; set; }
     public DbSet<Votes> Votes { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
+    {
+        //cambio para pruebas unitarias
+        if (optionsBuilder.IsConfigured) return;
 
+        var cs = _configuration.GetConnectionString("DefaultConnection")
+                 ?? _configuration.GetConnectionString("default");
+
+        if (!string.IsNullOrWhiteSpace(cs))
+        {
+            optionsBuilder.UseNpgsql(cs);
+        }
+    }
 }
