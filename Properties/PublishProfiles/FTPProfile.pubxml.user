@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2dliwvxBO0yKV4TAHu/1VQAAAAACAAAAAAAQZgAAAAEAACAAAAD5Lx2whIpSNAyTwgMk3K5K+iu08B2a1BJF7IWhDZLZhwAAAAAOgAAAAAIAACAAAABINDfF+IZUZT0gTxM0uXrC0tXE+rwNE1ruVg5UPDN5ySAAAAA+0uV4QAMBT/e4XDJgSZbp3bA5m1NA3pQcPy0IqrPVZUAAAACnm0wViCmRhfLNC4Z9Sj/yH6GHA2zh45hU4XBFd3LM9zGLd3jbZTmitk2xoaNzFqGLtybbbAb3pcKqQW/FVtJK</EncryptedPassword>
+    <_PublishTargetUrl>ftp://93.127.139.74/Sites/fletesProyect</_PublishTargetUrl>
+    <History>True|2025-10-10T05:42:59.0773229Z||;True|2025-10-09T23:28:28.4635413-06:00||;False|2025-10-09T23:21:52.0026994-06:00||;True|2025-10-09T23:09:55.4821317-06:00||;False|2025-10-09T23:06:36.6066034-06:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>09/10/2025 23:25:07</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>09/10/2025 23:24:55</publishTime>
+    </File>
+    <File Include="AutoMapper.dll">
+      <publishTime>01/16/2023 09:41:56</publishTime>
+    </File>
+    <File Include="AutoMapper.Extensions.Microsoft.DependencyInjection.dll">
+      <publishTime>08/04/2023 23:58:02</publishTime>
+    </File>
+    <File Include="BouncyCastle.Cryptography.dll">
+      <publishTime>05/27/2024 00:54:08</publishTime>
+    </File>
+    <File Include="fletesProyect">
+      <publishTime>10/09/2025 23:41:36</publishTime>
+    </File>
+    <File Include="fletesProyect.deps.json">
+      <publishTime>10/09/2025 23:41:39</publishTime>
+    </File>
+    <File Include="fletesProyect.dll">
+      <publishTime>10/09/2025 23:41:36</publishTime>
+    </File>
+    <File Include="fletesProyect.exe">
+      <publishTime>10/09/2025 23:26:57</publishTime>
+    </File>
+    <File Include="fletesProyect.pdb">
+      <publishTime>10/09/2025 23:41:36</publishTime>
+    </File>
+    <File Include="fletesProyect.runtimeconfig.json">
+      <publishTime>10/09/2025 23:41:38</publishTime>
+    </File>
+    <File Include="MailKit.dll">
+      <publishTime>07/15/2024 06:39:08</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Authentication.JwtBearer.dll">
+      <publishTime>06/14/2024 11:29:22</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Cryptography.Internal.dll">
+      <publishTime>06/14/2024 11:27:58</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Cryptography.KeyDerivation.dll">
+      <publishTime>06/14/2024 11:28:30</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll">
+      <publishTime>06/14/2024 11:29:30</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.JsonPatch.dll">
+      <publishTime>06/14/2024 11:27:56</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll">
+      <publishTime>06/14/2024 11:31:02</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.OpenApi.dll">
+      <publishTime>05/19/2024 22:26:22</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>06/14/2024 10:02:08</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>06/14/2024 10:02:42</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>06/14/2024 10:03:06</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Identity.Core.dll">
+      <publishTime>06/14/2024 11:28:52</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Identity.Stores.dll">
+      <publishTime>06/14/2024 11:29:02</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Options.dll">
+      <publishTime>01/17/2024 21:05:26</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Abstractions.dll">
+      <publishTime>11/20/2023 19:54:14</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>11/20/2023 19:11:54</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Logging.dll">
+      <publishTime>11/20/2023 19:14:30</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.dll">
+      <publishTime>11/20/2023 19:17:02</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <publishTime>11/20/2023 19:30:36</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>11/20/2023 19:23:16</publishTime>
+    </File>
+    <File Include="Microsoft.OpenApi.dll">
+      <publishTime>06/03/2024 10:00:56</publishTime>
+    </File>
+    <File Include="MimeKit.dll">
+      <publishTime>07/11/2024 07:18:40</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.Bson.dll">
+      <publishTime>11/27/2018 17:10:18</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>03/08/2023 01:09:54</publishTime>
+    </File>
+    <File Include="Npgsql.dll">
+      <publishTime>05/09/2024 07:45:24</publishTime>
+    </File>
+    <File Include="Npgsql.EntityFrameworkCore.PostgreSQL.dll">
+      <publishTime>05/11/2024 10:08:28</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Annotations.dll">
+      <publishTime>08/01/2024 04:08:24</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>08/01/2024 04:08:16</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>08/01/2024 04:08:22</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>07/19/2022 09:21:48</publishTime>
+    </File>
+    <File Include="System.Formats.Asn1.dll">
+      <publishTime>06/13/2024 13:34:54</publishTime>
+    </File>
+    <File Include="System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>10/09/2025 23:27:02</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
