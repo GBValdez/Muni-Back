@@ -24,7 +24,7 @@ namespace back.reports
         {
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "userNormal,ADMINMUNI,ADMINISTRATOR")]
         public override Task<ActionResult<reportDto>> post(reportDtoCreation newRegister, [FromQuery] object queryParams)
         {
             return base.post(newRegister, queryParams);
@@ -37,7 +37,7 @@ namespace back.reports
             return null;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public override async Task<ActionResult<resPag<reportDto>>> get([FromQuery] pagQueryDto infoQuery, [FromQuery] object queryParams)
         {
             IQueryable<Reports> query = context.Set<Reports>();
@@ -189,7 +189,7 @@ namespace back.reports
             return Ok();
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "userNormal,ADMINMUNI,ADMINISTRATOR")]
         public override Task<ActionResult> delete(long id)
         {
             return base.delete(id);

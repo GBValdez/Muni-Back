@@ -113,7 +113,7 @@ namespace project.users
         public async Task<IActionResult> register(userCreationDto newCliente)
         {
 
-            errorMessageDto error = await userSvc.register(newCliente, new List<string> { "ADMINISTRATOR" });
+            errorMessageDto error = await userSvc.register(newCliente, new List<string> { "userNormal" });
             if (error != null)
                 return BadRequest(error);
             // userEntity newUser = await userManager.FindByEmailAsync(newCliente.email);
@@ -227,8 +227,8 @@ namespace project.users
             if (EMAIL == null)
                 return BadRequest(new errorMessageDto("Credenciales invalidas"));
 
-            if (await userManager.IsEmailConfirmedAsync(EMAIL) == false)
-                return BadRequest(new errorMessageDto("Credenciales invalidas"));
+            //if (await userManager.IsEmailConfirmedAsync(EMAIL) == false)
+            //    return BadRequest(new errorMessageDto("Credenciales invalidas"));
 
             if (EMAIL.deleteAt != null)
                 return BadRequest(new errorMessageDto("Credenciales invalidas"));

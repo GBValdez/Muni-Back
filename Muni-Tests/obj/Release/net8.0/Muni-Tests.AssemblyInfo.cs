@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Muni-Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43499df82c77c9e84417833ac0388b009e0c030d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff947a904f5c83f7f58a12ce4e1b5503fc40e9b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Muni-Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Muni-Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
