@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Tests\\Muni-Tests.csproj": {}
+    "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Tests\\Muni-Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Backend\\fletesProyect.csproj": {
+    "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Backend\\fletesProyect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Backend\\fletesProyect.csproj",
+        "projectUniqueName": "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Backend\\fletesProyect.csproj",
         "projectName": "fletesProyect",
-        "projectPath": "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Backend\\fletesProyect.csproj",
-        "packagesPath": "C:\\Users\\sanch\\.nuget\\packages",
-        "outputPath": "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Backend\\obj\\",
+        "projectPath": "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Backend\\fletesProyect.csproj",
+        "packagesPath": "C:\\Users\\gbval\\.nuget\\packages\\",
+        "outputPath": "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Programas\\Visual Studio Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sanch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gbval\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,8 +43,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -117,24 +115,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "D:\\Programas\\NETDotnet\\Net8\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Tests\\Muni-Tests.csproj": {
+    "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Tests\\Muni-Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Tests\\Muni-Tests.csproj",
+        "projectUniqueName": "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Tests\\Muni-Tests.csproj",
         "projectName": "Muni-Tests",
-        "projectPath": "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Tests\\Muni-Tests.csproj",
-        "packagesPath": "C:\\Users\\sanch\\.nuget\\packages",
-        "outputPath": "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Tests\\obj\\",
+        "projectPath": "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Tests\\Muni-Tests.csproj",
+        "packagesPath": "C:\\Users\\gbval\\.nuget\\packages\\",
+        "outputPath": "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Programas\\Visual Studio Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sanch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gbval\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -143,15 +141,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Backend\\fletesProyect.csproj": {
-                "projectPath": "C:\\Users\\sanch\\OneDrive\\Desktop\\Muni-Back\\Muni-Backend\\fletesProyect.csproj"
+              "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Backend\\fletesProyect.csproj": {
+                "projectPath": "D:\\backup\\Escritorio\\Universidad\\Semestre 8\\Analisis de sistemas\\Proyecto\\plantilas\\back\\Muni-Backend\\fletesProyect.csproj"
               }
             }
           }
@@ -165,8 +162,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -229,7 +225,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "D:\\Programas\\NETDotnet\\Net8\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

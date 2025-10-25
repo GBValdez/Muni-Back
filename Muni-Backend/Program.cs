@@ -27,6 +27,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddHttpClient();
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<interceptorDb>();
 builder.Services.AddScoped<emailService>();
 builder.Services.AddScoped<userSvc>();
@@ -113,11 +114,13 @@ app.UseRouting();
 app.UseCors("myCors");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStaticFiles();
+app.UseDefaultFiles();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
 
 
 app.Run();
